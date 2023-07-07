@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const express = require('express');
 const mongoDB = require('./db');
 
@@ -29,4 +30,32 @@ app.get('/',(req,res)=>{
 })
 app.listen(port,()=>{
     console.log('App Listening on port 5000');
+=======
+const express = require('express');
+const mongoDB = require('./db');
+
+const app = express();
+const port = 5000;
+
+mongoDB();
+
+app.use((req,res,next)=>{
+    res.setHeader("Access-Control-Allow-Origin","http://localhost:3000");
+    res.header(
+        "Access-Control-Allow-Headers",
+        "Origin, X-Requested-With, Content-Type, Accept"
+    );
+    next();
+});
+app.use(express.json());
+app.use('/api',require('./routes/CreateUser'));
+app.use('/api',require('./routes/DisplayData'));
+app.use('/api',require('./routes/OrderData'));
+// app.use('/api/auth', require('./routes/Auth'));
+app.get('/',(req,res)=>{
+    res.send('Hello World!');
+})
+app.listen(port,()=>{
+    console.log('App Listening on port 5000');
+>>>>>>> 46da6290ae76d6109024d307e0eff6c15018c567
 })
